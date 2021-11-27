@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
-const session = requiere('express-session');
+const session = require('express-session');
 
 // ! Initializations
 const app = express();
@@ -14,7 +14,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 
 // Configurar el motor de plantillas Express Handlebars
-app.engine('.hbs', exphbs({
+app.engine('.hbs', exphbs.engine({
     defaultLayout: 'main',
     layoutsDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
@@ -40,6 +40,9 @@ app.use(session({
 // ! Global variables
 
 // ! Routes
+app.use(require('./routes/index'));
+app.use(require('./routes/notes'));
+app.use(require('./routes/users'));
 
 // ! Static Files
 
