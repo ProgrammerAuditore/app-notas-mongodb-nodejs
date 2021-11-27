@@ -1,11 +1,11 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-    res.send('Hola mundo');
+    res.render('index');
 });
 
 router.get('/acerca-de', (req, res) => {
-    res.send('Acerca de');
+    res.render('acerca-de');
 });
 
 module.exports = router;
