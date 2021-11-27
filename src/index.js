@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
+const methodOverride = require('method-override');
+const session = requiere('express-session');
 
 // ! Initializations
 const app = express();
@@ -23,6 +25,17 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs'); 
 
 // ! Middlewares
+
+// Validar información HTTP
+app.use(express.urlencoded({extend:false}));
+// Para utilizar PUT, DELETE
+app.use(methodOverride('_method'));
+// Generar 
+app.use(session({
+    secret: '/.phrase.secrent./',
+    resave: true,
+    saveUninitialized: true
+}));
 
 // ! Global variables
 
