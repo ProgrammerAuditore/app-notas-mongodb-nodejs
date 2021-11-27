@@ -1,19 +1,24 @@
 const express = require('express');
+const path = require('path');
 
-// Initializations
+// ! Initializations
 const app = express();
 
-// Settings
+// ! Settings
 app.set('port', process.env.PORT || 3000);
-// Middlewares
 
-// Global variables
+//  Establacer la ruta para las vistas
+app.set('views', path.join(__dirname, 'views'));
 
-// Routes
+// ! Middlewares
 
-// Static Files
+// ! Global variables
 
-// Server is listening
+// ! Routes
+
+// ! Static Files
+
+// ! Server is listening
 app.listen(app.get('port') , () => {
     console.log('Server on port ', app.get('port'));
 });
