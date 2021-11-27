@@ -30,7 +30,7 @@ app.set('view engine', '.hbs');
 app.use(express.urlencoded({extend:false}));
 // Para utilizar PUT, DELETE
 app.use(methodOverride('_method'));
-// Generar 
+// Autenticar usuario
 app.use(session({
     secret: '/.phrase.secrent./',
     resave: true,
