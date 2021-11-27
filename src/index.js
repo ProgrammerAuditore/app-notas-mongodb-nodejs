@@ -45,6 +45,8 @@ app.use(require('./routes/notes'));
 app.use(require('./routes/users'));
 
 // ! Static Files
+// Configurar la ruta para los archivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ! Server is listening
 app.listen(app.get('port') , () => {
