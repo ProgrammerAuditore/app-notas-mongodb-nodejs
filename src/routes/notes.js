@@ -28,6 +28,7 @@ router.post('/notes/new-note', async (req, res) => {
         // Guardar datos en la base de datos
         const notaNueva = new Note({ title, description });
         await notaNueva.save();
+        req.flash('success_msg', 'Nota agregada satisfactoriamente.');
 
         // Redireccionar
         res.redirect ('/notes');
@@ -61,11 +62,14 @@ router.put("/notes/edit-note/:id", async (req, res) => {
 
     // Actualizar los datos de la nota
     await Note.findByIdAndUpdate(req.params.id, {title, description});
+    req.flash('success_msg', 'Nota actualizada satisfactoriamente.');
+
     res.redirect('/notes');
 });
 
 router.delete("/notes/delete-note/:id", async (req, res) => {
     await Note.findByIdAndDelete(req.params.id);
+    req.flash('success_msg', 'Nota eliminada satisfactoriamente.');
     res.redirect('/notes');
 });
 
