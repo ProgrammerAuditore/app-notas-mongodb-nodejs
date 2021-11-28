@@ -1,12 +1,47 @@
 <div class="row">
-    {{#each notesx}}
+  {{#each notes}}
     <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">{{title}}</h4>
-                <p class="card-text">{{description}}</p>
-            </div>
+      <div class="card">
+        <div class="card-body">
+          <h4
+            class="card-title d-flex justify-content-between align-items-center"
+          >
+            <div style="font-size:1rem;">{{title}}</div>
+            <div><a href="#"><i class="fas fa-edit"></i></a></div>
+          </h4>
         </div>
+        <div class="card-footer">
+          <p class="card-text" style="font-size:0.7rem;">{{description}}</p>
+          <div class="d-grid grap-2">
+            <button
+              type="submit"
+              class="btn btn-danger btn-sm"
+              style="font-size:0.7rem;"
+            >
+              Eliminar nota
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    {{/each}}
+
+  {{else}}
+    <div class="col-md-3">
+      <div class="card position-absolute top-50 start-50 translate-middle">
+        <div class="card-body">
+          <p class="lead">No hay notas para mostrar.</p>
+          <div class="d-grid grap-2">
+            <a
+              type="submit"
+              class="btn btn-success btn-sm txt-white"
+              style="font-size:0.7rem;"
+              href="/notes/add"
+            >
+              Agregar nota
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
 </div>
