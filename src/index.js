@@ -4,6 +4,11 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const session = require('express-session');
 
+// * Solventar el error:
+// * https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access
+//const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+//const Handlebars = require('handlebars');
+
 // ! Initializations
 const app = express();
 require('./database');
@@ -19,7 +24,12 @@ app.engine('.hbs', exphbs.engine({
     defaultLayout: 'main',
     layoutsDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
-    extname: '.hbs'
+    extname: '.hbs',
+
+    // * Solventar el error:
+    // * https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access
+    //handlebars: allowInsecurePrototypeAccess(Handlebars)
+    
 }));
 
 // Utilizar el motor de plantillas para las vistas
