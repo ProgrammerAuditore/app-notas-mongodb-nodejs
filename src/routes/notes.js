@@ -42,9 +42,26 @@ router.get('/notes', async (req, res) => {
     // * https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access
     const notes = await Note.find({}).lean().sort({ date: 'desc' });
 
-    // Mostrar las notas
+    // Mostar la vista para ver todas las notas del usuario
     res.render('notes/all-notes', { notes });
 
+});
+
+router.get("/notes/edit/:id", async (req, res) => {
+
+    // Obtener la ruta deseada
+    const note = await Note.findById(req.params.id).lean();
+
+    // Mostar la vista para editar nota
+    res.render('notes/edit-note', {note});
+});
+
+router.put("/notes/edit-note/:id", async (req, res) => {
+    const { title, description } = req.body;
+
+    // Actualizar los datos de la nota
+    await Note.findByIdAndUpdate(req.params.id, {title, description});
+    res.redirect('/notes');
 });
 
 module.exports = router;
