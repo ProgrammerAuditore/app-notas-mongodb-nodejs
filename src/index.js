@@ -3,6 +3,7 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const flash = require('connect-flash');
 
 // * Solventar el error:
 // * https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access
@@ -47,8 +48,17 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+// Para mostrar mensajes
+app.use(flash());
 
 // ! Global variables
+// Mostar mensajes flash en todas las vistas
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+
+    next();
+});
 
 // ! Routes
 app.use(require('./routes/index'));
