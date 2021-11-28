@@ -35,8 +35,16 @@ router.post('/notes/new-note', async (req, res) => {
 });
 
 // Ruta para ver notas de un usuario
-router.get('/notes', (req, res) => {
-    res.send('Mis notas');
+router.get('/notes', async (req, res) => {
+
+    // Obtener todo los datos
+    // * Solventar el error:
+    // * https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access
+    const notesx = await Note.find({}).lean();
+
+    // Mostrar las notas
+    res.render('notes/all-notes', { notesx });
+
 });
 
 module.exports = router;
