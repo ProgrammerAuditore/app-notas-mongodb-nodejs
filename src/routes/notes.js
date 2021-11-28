@@ -40,7 +40,7 @@ router.get('/notes', async (req, res) => {
     // Obtener todo los datos
     // * Solventar el error:
     // * https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access
-    const notesx = await Note.find({}).lean();
+    const notesx = await Note.find({}).lean().sort({ date: 'desc' });
 
     // Mostrar las notas
     res.render('notes/all-notes', { notesx });
