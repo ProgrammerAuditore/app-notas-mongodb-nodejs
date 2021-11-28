@@ -1,1 +1,57 @@
-<h1>Registrarme</h1>
+<div class="row">
+  <div class="col-md-4 mx-auto">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Registrame</h3>
+      </div>
+      <div class="card-body">
+        <form action="/users/singup" method="POST">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              id="name"
+              aria-describedby="nameID"
+              placeholder="Escribe tu nombre"
+              autofocus
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo</label>
+            <input
+              type="text"
+              class="form-control"
+              name="email"
+              id="email"
+              aria-describedby="emailID"
+              placeholder="Escribe tu correo"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              id="password"
+              placeholder="Escribe una contraseña"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="checkpassword" class="form-label">Confirmar contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              name="checkpassword"
+              id="checkpassword"
+              placeholder="Confirmar contraseña"
+            />
+          </div>
+          <input class="btn btn-success" type="submit" value="Registrarme" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
