@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const User = require('../models/User');
 
 // Ruta para mostrar la vista de iniciar sesión
 router.get('/users/singin', (req, res) => {
@@ -11,7 +12,7 @@ router.get('/users/singup', (req, res) => {
 });
 
 // Ruta para registrar los datos de un usuario
-router.post('/users/singup', (req, res) => {
+router.post('/users/singup', async (req, res) => {
     const { name, email, password, checkpassword } = req.body;
     const errors = [];
 
@@ -34,7 +35,29 @@ router.post('/users/singup', (req, res) => {
     if( errors.length > 0  ){
         res.render('users/singup', { errors, name, email, password, checkpassword });
     }else{
-        res.send(`${name} - ${email} - ${password} - ${checkpassword} `);
+        
+        // Buscar un usuario por email
+        const emailUser = await User.findOne({ email : email });
+
+        // Verificar si el usuario a registrar existe
+        if(emailUser){
+            req.flash('error_msg', 'El email no está disponible.');
+            res.redirect('/users/singup');
+        }
+
+        // Crear un nuevo usario
+        const nuevoUsuario = new User({name, email, password});
+
+        // Encriptar la contraseña del usuario
+        nuevoUsuario.password = await nuevoUsuario.encrypPassword(password);
+        
+        // Registrar usuario
+        await nuevoUsuario.save();
+
+        req.flash('success_msg', 'Se registro exitosamente.');
+        res.redirect('/users/singin');
+
+        //res.send(`${name} - ${email} - ${password} - ${checkpassword} `);
     }
 });
 
