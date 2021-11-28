@@ -15,12 +15,20 @@ router.post('/users/singup', (req, res) => {
     const { name, email, password, checkpassword } = req.body;
     const errors = [];
 
-    if( password != checkpassword){
-        errors.push({ text: 'La contraseña no coinciden'});
+    if( checkpassword.length <= 0 || password.length <= 0){
+        errors.push({ text : 'Verifique los campos de password' });
     }
 
-    if( password.length > 4 ){
-        errors.push({ text : 'La contraseña debe ser mayor a 4 caracteres'});
+    if( name.length <= 0 || email.length <= 0 ){
+        errors.push({ text: 'Verifique el campo nombre y email'});
+    } else {
+        if( password != checkpassword){
+            errors.push({ text: 'La contraseña no coinciden'});
+        }
+
+        if( password.length < 4  ){
+            errors.push({ text : 'La contraseña debe ser mayor a 4 caracteres'});
+        }
     }
 
     if( errors.length > 0  ){
