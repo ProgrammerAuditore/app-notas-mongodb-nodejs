@@ -5,6 +5,27 @@ router.get('/notes/add', (req, res) => {
     res.render('notes/nueva-nota');
 });
 
+// Ruta para recibir datos al crear una nota
+router.post('/notes/new-note', (req, res) => {
+    const { title, description } = req.body;
+    const errors = [];
+
+    if(!title) {
+        errors.push({text: 'Por favor, inserte un titulo'});
+    }
+
+    if(!description) {
+        errors.push({text: 'Por favor, escriba una descripción'});
+    }
+
+    if( errors.length > 0){
+        // Renderizar vista con errores
+        res.render('notes/nueva-nota', { errors, title, description });
+    } else {
+        res.send('OK');
+    }
+});
+
 // Ruta para ver notas de un usuario
 router.get('/notes', (req, res) => {
     res.send('Mis notas');
