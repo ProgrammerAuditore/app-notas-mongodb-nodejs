@@ -1,12 +1,14 @@
 const router = require('express').Router();
 
+const Note = require('../models/Note');
+
 // Ruta para crear una nota
 router.get('/notes/add', (req, res) => {
     res.render('notes/nueva-nota');
 });
 
 // Ruta para recibir datos al crear una nota
-router.post('/notes/new-note', (req, res) => {
+router.post('/notes/new-note', async (req, res) => {
     const { title, description } = req.body;
     const errors = [];
 
@@ -21,8 +23,14 @@ router.post('/notes/new-note', (req, res) => {
     if( errors.length > 0){
         // Renderizar vista con errores
         res.render('notes/nueva-nota', { errors, title, description });
+
     } else {
-        res.send('OK');
+        // Guardar datos en la base de datos
+        const notaNueva = new Note({ title, description });
+        await notaNueva.save();
+
+        // Redireccionar
+        res.redirect ('/notes');
     }
 });
 
