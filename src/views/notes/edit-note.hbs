@@ -6,43 +6,45 @@
 {{/each}}
 
 {{#with note}}
-<div class="col-md-4 mx-auto">
-  <div class="card">
-    <div class="card-header">
-      <h3>Editar nota</h3>
-    </div>
-    <div class="card-body">
-      <form action="/notes/edit-note/{{_id}}?_method=PUT" method="POST">
-       <input type="hidden" name="_method" value="PUT" />
-        <div class="mb-3">
-          <label for="title" class="form-label">Titulo</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            class="form-control"
-            placeholder="Nota"
-            aria-describedby="titleID"
-            value="{{title}}"
-            autofocus
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">Descripción</label>
-          <textarea
-            class="form-control"
-            name="description"
-            placeholder="Descripción"
-            id="description"
-            rows="3"
-            required
-          >{{description}}</textarea>
-        </div>
-        <div class="d-grid grap-2">
-          <button type="submit" class="btn btn-success">Actualizar nota</button>
-        </div>
-      </form>
+<div class="row">
+  <div class="col-md-4 mx-auto">
+    <div class="card mt-4">
+      <div class="card-header">
+        <h3>Editar nota</h3>
+      </div>
+      <div class="card-body">
+        <form action="/notes/edit-note/{{_id}}?_method=PUT" method="POST">
+        <input type="hidden" name="_method" value="PUT" />
+          <div class="mb-3">
+            <label for="title" class="form-label">Titulo</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              class="form-control"
+              placeholder="Nota"
+              aria-describedby="titleID"
+              value="{{title}}"
+              autofocus
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <textarea
+              class="form-control"
+              name="description"
+              placeholder="Descripción"
+              id="description"
+              rows="3"
+              required
+            >{{description}}</textarea>
+          </div>
+          <div class="d-grid grap-2">
+            <button type="submit" class="btn btn-success">Actualizar nota</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
