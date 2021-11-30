@@ -73,14 +73,21 @@ app.use(require('./routes/index'));
 app.use(require('./routes/notes'));
 app.use(require('./routes/users'));
 
+
 // ! Static Files
 // Configurar la ruta para los archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
+
+// ! Error 404
+app.use(function(req, res, next){
+    res.status(404).render('404');
+});
 
 // ! Server is listening
 app.listen(app.get('port') , () => {
     console.log('Server on port ', app.get('port'));
 });
+
 
 
 
