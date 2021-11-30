@@ -17,8 +17,8 @@
     <title>Notes App</title>
 </head>
 <body>
-    <p>Nav</p>
-
+    {{> navigation}}
+    
     <main class="container">
         {{> messages}}
         {{> error}}
@@ -26,9 +26,6 @@
         
         {{{ body }}}    
     </main>
-    
-
-    <p>Footer</p>
     
     {{!-- Bootstrap 5.x --}}
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
