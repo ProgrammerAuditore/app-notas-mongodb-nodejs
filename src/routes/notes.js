@@ -27,6 +27,7 @@ router.post('/notes/new-note', isAuthenticated, async (req, res) => {
     } else {
         // Guardar datos en la base de datos
         const notaNueva = new Note({ title, description });
+        notaNueva.user = req.user.id;
         await notaNueva.save();
         req.flash('success_msg', 'Nota agregada satisfactoriamente.');
 
@@ -41,7 +42,7 @@ router.get('/notes', isAuthenticated, async (req, res) => {
     // Obtener todo los datos
     // * Solventar el error:
     // * https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access
-    const notes = await Note.find({}).lean().sort({ date: 'desc' });
+    const notes = await Note.find({user : req.user.id}).lean().sort({ date: 'desc' });
 
     // Mostar la vista para ver todas las notas del usuario
     res.render('notes/all-notes', { notes });
