@@ -12,5 +12,3 @@ como bcryptjs, connect-flash, express-handlebars, mongoose, etc.
 ![Preview 2](/source/preview02.jpg)
 
 ![Preview 3](/source/preview03.jpg)
-
-![Preview 4](/source/preview04.jpg)
