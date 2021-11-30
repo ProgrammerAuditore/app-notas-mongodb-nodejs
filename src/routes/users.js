@@ -10,7 +10,7 @@ router.get('/users/singin', (req, res) => {
 // Ruta para iniciar sesión de un usuario
 router.post('/user/singin', passport.authenticate('local', {
     successRedirect : '/notes',
-    failureRedirect : '/users/signin',
+    failureRedirect : '/users/singin',
     failureFlash : true
 }));
 
