@@ -69,4 +69,9 @@ router.post('/users/singup', async (req, res) => {
     }
 });
 
+router.get('/users/logout', async (req, res) => {
+    await req.logout();
+    res.redirect('/');
+});
+
 module.exports = router;
