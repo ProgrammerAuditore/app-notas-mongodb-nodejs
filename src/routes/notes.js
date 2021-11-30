@@ -1,14 +1,14 @@
 const router = require('express').Router();
-
+const { isAuthenticated } = require('../helpers/auth');
 const Note = require('../models/Note');
 
 // Ruta para crear una nota
-router.get('/notes/add', (req, res) => {
+router.get('/notes/add', isAuthenticated, (req, res) => {
     res.render('notes/nueva-nota');
 });
 
 // Ruta para recibir datos al crear una nota
-router.post('/notes/new-note', async (req, res) => {
+router.post('/notes/new-note', isAuthenticated, async (req, res) => {
     const { title, description } = req.body;
     const errors = [];
 
@@ -36,7 +36,7 @@ router.post('/notes/new-note', async (req, res) => {
 });
 
 // Ruta para ver notas de un usuario
-router.get('/notes', async (req, res) => {
+router.get('/notes', isAuthenticated, async (req, res) => {
 
     // Obtener todo los datos
     // * Solventar el error:
@@ -48,7 +48,7 @@ router.get('/notes', async (req, res) => {
 
 });
 
-router.get("/notes/edit/:id", async (req, res) => {
+router.get("/notes/edit/:id", isAuthenticated, async (req, res) => {
 
     // Obtener la ruta deseada
     const note = await Note.findById(req.params.id).lean();
@@ -57,7 +57,7 @@ router.get("/notes/edit/:id", async (req, res) => {
     res.render('notes/edit-note', {note});
 });
 
-router.put("/notes/edit-note/:id", async (req, res) => {
+router.put("/notes/edit-note/:id", isAuthenticated, async (req, res) => {
     const { title, description } = req.body;
 
     // Actualizar los datos de la nota
@@ -67,7 +67,7 @@ router.put("/notes/edit-note/:id", async (req, res) => {
     res.redirect('/notes');
 });
 
-router.delete("/notes/delete-note/:id", async (req, res) => {
+router.delete("/notes/delete-note/:id", isAuthenticated, async (req, res) => {
     await Note.findByIdAndDelete(req.params.id);
     req.flash('success_msg', 'Nota eliminada satisfactoriamente.');
     res.redirect('/notes');
