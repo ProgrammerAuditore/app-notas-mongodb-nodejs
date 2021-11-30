@@ -1,10 +1,18 @@
 const router = require('express').Router();
 const User = require('../models/User');
+const passport = require('passport');
 
 // Ruta para mostrar la vista de iniciar sesión
 router.get('/users/singin', (req, res) => {
     res.render('users/singin');
 });
+
+// Ruta para iniciar sesión de un usuario
+router.post('/user/singin', passport.authenticate('local', {
+    successRedirect : '/notes',
+    failureRedirect : '/users/signin',
+    failureFlash : true
+}));
 
 // Ruta para mostrar la vista de registrarme
 router.get('/users/singup', (req, res) => {
