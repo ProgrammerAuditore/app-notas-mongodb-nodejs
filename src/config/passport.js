@@ -4,20 +4,18 @@ const User = require('../models/User');
 
 // Definir una estrategia de autenticación
 passport.use(new LocalStrategy({
-    usernameField : 'email'
-}, async (email, password, done) => {
-    const user = await User.findOne({ email : email});
-    if(!user){
-        return done(null, fails, { message : 'Usuari no encontrado' });
-    }else{
-        const match = await User.matchPassword(password);
-        if(match){
-            return done(null, user);
-        }else{
-            return done(null, false, { message : 'Contraseña incorrecto' });
-        }
+    usernameField: 'email',
+    passwordField: 'password',
+  },
+  function(email, password, done) {
+        User.findOne({ email: email }, function (err, user) {
+          if (err) { return done(err); }
+          if (!user) { return done(null, false); }
+          if (!user.matchPassword(password)) { return done(null, false); }
+          return done(null, user);
+        });
     }
-}));
+));
 
 // Almacenar el ID del usuario autenticado
 passport.serializeUser( (user, done) => {
